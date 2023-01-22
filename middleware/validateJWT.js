@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const validateJWT = (req, res, next) => {
 
     const token = req.header('x-token');
-
+//si no hay token 
     if (!token) {
         return res.status(401).json({
             ok: false,
@@ -15,6 +15,7 @@ const validateJWT = (req, res, next) => {
 
     try {
 
+        //le pasamos la var de llave que hemos hecho como segundo argumento para el verify
         const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
         // console.log(payload);
         req.uid = payload.uid;
@@ -27,6 +28,7 @@ const validateJWT = (req, res, next) => {
         })
     }
 
+    //middleware que ejecuta la siguiente funcion
     next();
 
 };

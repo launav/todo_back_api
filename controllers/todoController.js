@@ -24,6 +24,7 @@ const createTodo = async (req, res) => {
         //requerimos del todo user el id del usuario
         createTodo.user = req.uid;
 
+        //asi lo llamaremos desde el front
         const newTodo = await createTodo.save()
 
         return res.status(201).json({
@@ -75,7 +76,8 @@ const updateTodo = async (req, res) => {
             user: uid
         };
 
-        const editedTodo = await Todo.findByIdAndUpdate(todoId, newTodo, { new: true });
+        //busca y actualiza por el id
+        const editedTodo = await Todo.findByIdAndUpdate(todoId, newTodo, { $set: { completed: !newTodo.completed } });
 
         return res.status(200).json({
             ok: true,
@@ -109,7 +111,7 @@ const deleteTodo = async (req, res) => {
                 msg: 'No hay evento con ese id'
             });
         };
-
+//si es diferente el usuario del todo al usuario que lo está borrando que me devuelva un 401
         if (todo.user.toString() !== uid) {
             return res.status(401).json({//no tienes privilegios
                 ok: false,

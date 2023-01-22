@@ -26,7 +26,7 @@ const createUser = async (req, res) => {
         //si el user no existe vamos a encriptar la contraseña
 
         const salt = bcript.genSaltSync();//si no tiene argumento es 10-> el salt es un num aleatorio
-        //encripatcion de una sola via
+        //encriptacion de una sola via
 
         usuario.password = bcript.hashSync(password, salt);//req el password inicial y el salt para encriptarla
         // console.log(usuario.password);
@@ -58,13 +58,14 @@ const createUser = async (req, res) => {
 
 };
 
-//LOGIN USER-> LOGEARSE
+//LOGIN USER-> LOGUEARSE
 const loginUser = async (req, res) => {
 
     const { email, password } = req.body;
 
     try {
 
+        //busca por el email
         const usuario = await User.findOne({ email });
 
         if (!usuario) {
@@ -87,6 +88,7 @@ const loginUser = async (req, res) => {
         //Volvemos a generar el jwt
         const token = await JWTGenerator(usuario.id, usuario.name);
 
+
         const user = {
             name: usuario.name,
             email: usuario.email,
@@ -98,14 +100,9 @@ const loginUser = async (req, res) => {
             msg: 'Login correcto',
             user,
             token
-
         });
 
-
-
     } catch (error) {
-        // console.log(error);
-
         //500->error del servidor
         return res.status(500).json({
             ok: false,

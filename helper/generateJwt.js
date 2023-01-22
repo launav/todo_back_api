@@ -6,10 +6,10 @@ const JWTGenerator = (uid, name, email) => {//recoge el payload
     return new Promise((resolve, reject) => {
         const payload = { uid, name, email };
 
-        jwt, jwt.sign(
+        jwt.sign(
             payload,
             process.env.JWT_SECRET_KEY,
-            { expiresIn: '20h' },//tiempo que tarda en expirar el token del user
+            { expiresIn: '4h' },//tiempo que tarda en expirar el token del user
             (error, token) => {
                 if (error) {
                     // console.log(error)

@@ -37,7 +37,7 @@ app.use('/api/todo', require('./routes/todoRoutes'));
 // });
 
 
-//APP A LA ESCUCHA
+//PONEMOS A APP A LA ESCUCHA
 app.listen(port, () => {
     console.log(`Express a la escucha del puerto ${port}`)
 });

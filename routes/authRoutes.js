@@ -9,10 +9,12 @@ const { validateJWT } = require("../middleware/validateJWT");
 //middleware
 //REGISTER -> ruta que va a seguir cuando se registre
 router.post('/new', [
-    check('name', 'Write a name').not().isEmpty(),//chequea que el nombre no este vacio, campo y error
+    //chequea que el nombre/email/contraseña no estén vacios, campo y error
+    check('name', 'Write a name').not().isEmpty(),
     check('email', 'Write a correct e-mail').isEmail(),
     check('password', 'The password must have more than 6 characters').isLength({ min: 6, max: 20 }),
-    validarInput //comprueba todos los campos anteriores y comprueba los resultados, si todo va bien me muestra lo siquiente
+    //comprueba todos los campos anteriores y comprueba los resultados, si todo va bien me muestra lo siquiente
+    validarInput 
 ], createUser);
 
 

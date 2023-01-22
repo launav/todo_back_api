@@ -17,6 +17,7 @@ router.get('/', getTodos);
 
 //RUTAS PARA CREAR UN EVENTO
 router.post('/', [
+    //checkea los campos
     check('title', "Debes escribir el título").not().isEmpty(),
     check('date', "Debes indicar la fecha").custom(validateDate),
     validarInput
@@ -24,10 +25,12 @@ router.post('/', [
 
 
 //ACTUALIZAR UN EVENTO -> actualizará el estado del evento, si está completo o no
+//le pasamos como param el id
 router.put('/:id', updateTodo);
 
 
 //ELIMINAR UN EVENTO
+//le pasamos como param el id
 router.delete('/:id', deleteTodo);
 
 

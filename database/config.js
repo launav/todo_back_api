@@ -6,6 +6,7 @@ const dbConnect = async () => {
     try {
 
         mongoose.set('strictQuery', true);
+        //espera la conexion a moongoaw, le pasamos la var entorno
         await mongoose.connect(process.env.DB_CNN);//requiere la uri
         console.log('conectado a la base de datos');
 
